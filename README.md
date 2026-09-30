@@ -1,159 +1,126 @@
-````markdown
 # 📧 Email Validator Pipeline
 
-A Python-based automation script that processes a **5,000-row CSV dataset**, validates email addresses using **Regular Expressions**, and automatically separates valid and invalid emails into different CSV files.
+A simple Python automation pipeline that processes a **5,000-row CSV dataset**, validates email addresses using **Regular Expressions (Regex)**, and automatically separates them into **valid** and **invalid** CSV files.
 
----
+## 🚀 Features
 
-## ⚙️ Tech Stack
+* 📂 Reads email data from a CSV file
+* 🔍 Validates email addresses using Regex
+* ✅ Separates valid email addresses
+* ❌ Separates invalid email addresses
+* 📄 Automatically generates separate CSV output files
+* ⚡ Lightweight and easy to run
 
-**Language:** Python  
-**Modules:** `re`, `csv`
+## 🛠️ Tech Stack
 
----
+| Technology | Usage                                     |
+| ---------- | ----------------------------------------- |
+| **Python** | Core programming language                 |
+| **`re`**   | Regular expression-based email validation |
+| **`csv`**  | Reading and writing CSV files             |
 
-## 🔄 Pipeline
+## 🔎 Email Validation Logic
 
-```text
-fake_dataset.csv
-       ↓
- Read Email Addresses
-       ↓
-   Regex Validation
-       ↓
-  ┌──────────────┐
-  │              │
-Valid          Invalid
-  │              │
-  ↓              ↓
-valid_emails.csv   invalid_emails.csv
-````
-
----
-
-## 🔍 Validation Logic
-
-The Regex validates the basic structure of an email address.
+The Regex validates the structure of an email address by checking both the **local part** and **domain part**.
 
 ### Local Part
 
 The section before `@`:
 
-* Starts with a letter or digit
-* Ends with a letter or digit
-* Supports letters, digits, `_`, `.`, `%`, `+`, and `-`
+* Must start and end with a **letter or digit**
+* Can contain:
+
+  * Letters
+  * Digits
+  * `_`
+  * `.`
+  * `%`
+  * `+`
+  * `-`
+* Does not allow **consecutive dots**
+* Does not allow trailing special characters
 
 ### Domain Part
 
 The section after `@`:
 
-* Starts with a letter or digit
-* Ends with a letter or digit
-* Allows letters, digits, and hyphens
-* Requires at least one `.`
-* Uses a **2–4 letter** domain extension
+* Must start and end with a **letter or digit**
+* Can contain hyphens internally
+* Must contain at least one `.`
+* Requires a **2–4 character domain extension**
 
 Examples:
 
 ```text
-user@example.com
-john.smith@company.org
-alex_123@test.net
+example@gmail.com
+user.name@company.org
+student123@college.net
 ```
 
----
-
-## 📂 Project Structure
+## 📊 Input → Processing → Output
 
 ```text
-Email-Validator-Pipeline/
-│
-├── fake_dataset.csv
-├── valid_email_checker.py
-├── valid_emails.csv
-├── invalid_emails.csv
-└── README.md
+          5,000 Row CSV
+                │
+                ▼
+        ┌─────────────────┐
+        │  Read CSV Data  │
+        └────────┬────────┘
+                 │
+                 ▼
+        ┌─────────────────┐
+        │  Regex Validator│
+        └────────┬────────┘
+                 │
+          ┌──────┴──────┐
+          ▼             ▼
+       ✅ Valid       ❌ Invalid
+          │             │
+          ▼             ▼
+   valid_emails.csv  invalid_emails.csv
 ```
 
----
+## 📁 Output
 
-## ▶️ Run the Project
-
-Clone the repository:
-
-```bash
-git clone https://github.com/aaditya-hamirani07/Email-Validator-Pipeline.git
-```
-
-Navigate into the project:
-
-```bash
-cd Email-Validator-Pipeline
-```
-
-Run the script:
-
-```bash
-python valid_email_checker.py
-```
-
-The script reads:
-
-```text
-fake_dataset.csv
-```
-
-and generates:
+The pipeline automatically creates:
 
 ```text
 valid_emails.csv
 invalid_emails.csv
 ```
 
----
+## ▶️ How to Run
 
-## 📊 Dataset
+### 1. Clone the repository
 
-The project uses a **5,000-row synthetic dataset** containing a mixture of valid-looking and malformed email addresses.
+```bash
+git clone <your-repository-url>
+cd <repository-folder>
+```
 
-Examples of invalid formats included in the dataset:
+### 2. Run the script
+
+```bash
+python email_validator.py
+```
+
+### 3. Check the generated files
 
 ```text
-@example.com
-user @example.com
-user@example
-user@domain_com
-user@.com
-user@example.c
+valid_emails.csv
+invalid_emails.csv
 ```
+
+## 🎯 Purpose
+
+This project demonstrates practical use of:
+
+* Python file handling
+* CSV data processing
+* Regular expressions
+* Data validation
+* Basic automation pipelines
 
 ---
 
-## 🧠 Key Concepts Used
-
-```text
-Python
-├── Regular Expressions
-├── CSV File Handling
-├── Functions
-├── Loops
-├── Conditional Logic
-└── File I/O
-```
-
----
-
-## 🎯 Project Goal
-
-The goal of this project is to automate the process of **sorting and filtering large collections of email addresses**, replacing manual checking with a simple Python-based validation pipeline.
-
----
-
-## 👨‍💻 Author
-
-**Aaditya Hamirani**
-
-[GitHub](https://github.com/aaditya-hamirani07)
-
-```
-```
+⭐ **Built with Python** | CSV Processing • Regex • Automation
